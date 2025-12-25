@@ -483,7 +483,8 @@ add_action('plugins_loaded', array('WP_MJ_Ecommerce_Profile', 'get_instance'));
 function wp_mj_ecommerce_profile_activate() {
     // Set a transient to trigger rewrite flush on next init
     // This ensures post types are registered before flushing
-    set_transient('wp_mj_ecommerce_profile_flush_rewrite_rules', 1, 60);
+    // Using HOUR_IN_SECONDS to ensure it doesn't expire too quickly
+    set_transient('wp_mj_ecommerce_profile_flush_rewrite_rules', 1, HOUR_IN_SECONDS);
 }
 register_activation_hook(__FILE__, 'wp_mj_ecommerce_profile_activate');
 
