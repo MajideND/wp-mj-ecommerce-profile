@@ -6,7 +6,8 @@
 /* RTL support for meta boxes */
 #mj_writer_metabox .inside,
 #mj_translator_metabox .inside,
-#mj_publisher_metabox .inside {
+#mj_publisher_metabox .inside,
+#mj_profile_type_metabox .inside {
     direction: rtl;
     text-align: right;
 }
@@ -14,7 +15,8 @@
 /* Style the select dropdowns */
 #mj_writer_metabox select,
 #mj_translator_metabox select,
-#mj_publisher_metabox select {
+#mj_publisher_metabox select,
+#mj_profile_type_metabox select {
     direction: rtl;
     text-align: right;
     font-family: Tahoma, Arial, sans-serif;
@@ -24,7 +26,8 @@
 /* Style the help text */
 #mj_writer_metabox .howto,
 #mj_translator_metabox .howto,
-#mj_publisher_metabox .howto {
+#mj_publisher_metabox .howto,
+#mj_profile_type_metabox .howto {
     direction: rtl;
     text-align: right;
 }
@@ -32,35 +35,39 @@
 /* Style the meta box titles */
 #mj_writer_metabox .hndle,
 #mj_translator_metabox .hndle,
-#mj_publisher_metabox .hndle {
+#mj_publisher_metabox .hndle,
+#mj_profile_type_metabox .hndle {
     font-family: Tahoma, Arial, sans-serif;
 }
 
 /* Ensure proper display of Farsi text in admin columns */
-.column-mj_writer,
-.column-mj_translator,
-.column-mj_publisher {
+.column-mj_profile_type {
     direction: rtl;
     text-align: right;
     font-family: Tahoma, Arial, sans-serif;
 }
 
-/* Style for taxonomy admin pages */
-body.taxonomy-mj_writer,
-body.taxonomy-mj_translator,
-body.taxonomy-mj_publisher {
+/* Style for taxonomy and post type admin pages */
+body.post-type-mj_profile,
+body.taxonomy-mj_profile_type {
     direction: rtl;
 }
 
-body.taxonomy-mj_writer #wpbody-content,
-body.taxonomy-mj_translator #wpbody-content,
-body.taxonomy-mj_publisher #wpbody-content {
+body.post-type-mj_profile #wpbody-content,
+body.taxonomy-mj_profile_type #wpbody-content {
     direction: rtl;
+}
+
+/* Style for profile post type list */
+.post-type-mj_profile .widefat td,
+.post-type-mj_profile .widefat th {
+    font-family: Tahoma, Arial, sans-serif;
 }
 
 /* Fix for WordPress admin in RTL context */
 .rtl #mj_writer_metabox .inside,
 .rtl #mj_translator_metabox .inside,
-.rtl #mj_publisher_metabox .inside {
+.rtl #mj_publisher_metabox .inside,
+.rtl #mj_profile_type_metabox .inside {
     direction: rtl;
 }

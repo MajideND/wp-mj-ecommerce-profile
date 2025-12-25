@@ -1,14 +1,15 @@
 # WP MJ E-commerce Profile
 
-A WordPress plugin that adds custom profile taxonomies for WooCommerce products with full Farsi/Persian language support.
+A WordPress plugin that adds a custom Profile post type for WooCommerce products with full Farsi/Persian language support.
 
 ## Features
 
-- **Three Custom Taxonomies**: نویسنده (Writer), مترجم (Translator), انتشارات (Publisher)
-- **Single Selection**: Each product can select one item from each taxonomy
+- **Custom Post Type**: Profile post type with `/profile` URL slug and no archive page
+- **Three Profile Types**: نویسنده (Writer), مترجم (Translator), انتشارات (Publisher)
+- **Single Selection**: Each product can select one profile from each type
 - **Farsi Support**: Full RTL and Farsi text support
 - **WooCommerce Integration**: Seamlessly integrates with WooCommerce products
-- **Admin Columns**: Shows selected profiles in product list admin view
+- **Admin Columns**: Shows selected profile type in profile list admin view
 - **Custom Meta Boxes**: User-friendly dropdown selectors in product edit screen
 
 ## Requirements
@@ -22,36 +23,53 @@ A WordPress plugin that adds custom profile taxonomies for WooCommerce products 
 1. Upload the plugin files to `/wp-content/plugins/wp-mj-ecommerce-profile/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Make sure WooCommerce is installed and activated
-4. Navigate to Products > نویسنده, Products > مترجم, or Products > انتشارات to add profile terms
+4. Navigate to **پروفایل‌ها** (Profiles) in the admin menu to add profiles
 
 ## Usage
 
-### Adding Profile Terms
+### Adding Profiles
 
-1. Go to **Products > نویسنده** to add writers/authors
-2. Go to **Products > مترجم** to add translators
-3. Go to **Products > انتشارات** to add publishers
+1. Go to **پروفایل‌ها > افزودن جدید** (Profiles > Add New)
+2. Enter the profile name and details
+3. Select the **نوع پروفایل** (Profile Type) in the sidebar:
+   - نویسنده (Writer)
+   - مترجم (Translator)
+   - انتشارات (Publisher)
+4. Publish the profile
 
 ### Assigning Profiles to Products
 
 1. Edit a product in WooCommerce
-2. Find the profile meta boxes in the right sidebar
-3. Select one نویسنده (writer), one مترجم (translator), and/or one انتشارات (publisher)
+2. Find the profile meta boxes in the right sidebar:
+   - **نویسنده** - Select a writer profile
+   - **مترجم** - Select a translator profile
+   - **انتشارات** - Select a publisher profile
+3. Each dropdown shows only profiles of that specific type
 4. Save/update the product
 
-## Taxonomies
+## Structure
 
-The plugin registers three custom taxonomies:
+### Custom Post Type
 
-- **mj_writer** (نویسنده) - Writer/Author profile
-- **mj_translator** (مترجم) - Translator profile
-- **mj_publisher** (انتشارات) - Publisher profile
+- **Post Type**: `mj_profile`
+- **Slug**: `/profile`
+- **Archive**: Disabled (no archive page)
+- **Public**: Yes (individual profiles are publicly viewable)
 
-All taxonomies:
-- Are non-hierarchical
-- Support REST API
-- Show in admin columns
-- Have custom meta boxes for single selection
+### Taxonomy
+
+- **Taxonomy**: `mj_profile_type` (Profile Type)
+- **Terms**: 
+  - `writer` - نویسنده (Writer)
+  - `translator` - مترجم (Translator)
+  - `publisher` - انتشارات (Publisher)
+
+### Product Meta
+
+Products store profile selections as post meta:
+- `_mj_profile_writer` - Selected writer profile ID
+- `_mj_profile_translator` - Selected translator profile ID
+- `_mj_profile_publisher` - Selected publisher profile ID
 
 ## Development
 
