@@ -188,7 +188,10 @@ class WP_MJ_Ecommerce_Profile {
         
         foreach ($default_types as $slug => $name) {
             if (!term_exists($slug, 'mj_profile_type')) {
-                wp_insert_term($name, 'mj_profile_type', array('slug' => $slug));
+                $result = wp_insert_term($name, 'mj_profile_type', array('slug' => $slug));
+                if (is_wp_error($result)) {
+                    error_log('WP MJ E-commerce Profile: Failed to create term ' . $slug . ': ' . $result->get_error_message());
+                }
             }
         }
     }
@@ -319,15 +322,18 @@ class WP_MJ_Ecommerce_Profile {
         // Get the term ID for this profile type
         $type_term = get_term_by('slug', $profile_type, 'mj_profile_type');
         
-        if (!$type_term) {
+        if (!$type_term || is_wp_error($type_term)) {
             echo '<p>' . __('نوع پروفایل یافت نشد', 'wp-mj-ecommerce-profile') . '</p>';
+            if (is_wp_error($type_term)) {
+                error_log('WP MJ E-commerce Profile: Error getting term for ' . $profile_type . ': ' . $type_term->get_error_message());
+            }
             return;
         }
         
-        // Get all profiles of this type
+        // Get all profiles of this type (limit to 500 for performance)
         $profiles = get_posts(array(
             'post_type'      => 'mj_profile',
-            'posts_per_page' => -1,
+            'posts_per_page' => 500,
             'orderby'        => 'title',
             'order'          => 'ASC',
             'tax_query'      => array(
@@ -388,14 +394,26 @@ function wp_mj_save_profile_type($post_id, $post) {
         return;
     }
     
-    // Save profile type
+    // Validate and save profile type
     if (isset($_POST['mj_profile_type'])) {
         $type_id = intval($_POST['mj_profile_type']);
         if ($type_id > 0) {
-            wp_set_object_terms($post_id, $type_id, 'mj_profile_type', false);
+            $term = get_term($type_id, 'mj_profile_type');
+            if (!is_wp_error($term) && $term) {
+                wp_set_object_terms($post_id, $type_id, 'mj_profile_type', false);
+            } else {
+                error_log('WP MJ E-commerce Profile: Invalid profile type ID: ' . $type_id);
+            }
         } else {
+            // If publishing without a type, show an error
+            if ($post->post_status === 'publish') {
+                wp_die(__('یک نوع پروفایل باید انتخاب شود', 'wp-mj-ecommerce-profile'), __('خطا', 'wp-mj-ecommerce-profile'), array('back_link' => true));
+            }
             wp_delete_object_term_relationships($post_id, 'mj_profile_type');
         }
+    } elseif ($post->post_status === 'publish') {
+        // If publishing without selecting a type, prevent it
+        wp_die(__('یک نوع پروفایل باید انتخاب شود', 'wp-mj-ecommerce-profile'), __('خطا', 'wp-mj-ecommerce-profile'), array('back_link' => true));
     }
 }
 
