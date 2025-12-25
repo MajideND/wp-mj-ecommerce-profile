@@ -469,3 +469,26 @@ function wp_mj_save_product_profiles($post_id, $post) {
 
 // Initialize the plugin
 add_action('plugins_loaded', array('WP_MJ_Ecommerce_Profile', 'get_instance'));
+
+/**
+ * Plugin activation hook
+ * Flush rewrite rules to ensure profile URLs work properly
+ */
+function wp_mj_ecommerce_profile_activate() {
+    // Initialize the plugin instance to register post types and taxonomies
+    WP_MJ_Ecommerce_Profile::get_instance()->register_post_type_and_taxonomy();
+    
+    // Flush rewrite rules to make profile URLs work
+    flush_rewrite_rules();
+}
+register_activation_hook(__FILE__, 'wp_mj_ecommerce_profile_activate');
+
+/**
+ * Plugin deactivation hook
+ * Flush rewrite rules to clean up
+ */
+function wp_mj_ecommerce_profile_deactivate() {
+    // Flush rewrite rules to clean up profile URLs
+    flush_rewrite_rules();
+}
+register_deactivation_hook(__FILE__, 'wp_mj_ecommerce_profile_deactivate');
