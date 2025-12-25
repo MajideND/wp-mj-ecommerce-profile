@@ -79,6 +79,18 @@ The plugin follows WordPress coding standards and best practices:
 - Singleton pattern for the main class
 - Translation-ready with text domain support
 
+## Troubleshooting
+
+### Profile URLs showing 404 error
+
+If profile single pages are showing a 404 error:
+
+1. Make sure WooCommerce is installed and activated (required)
+2. Deactivate and reactivate the plugin to flush rewrite rules
+3. Alternatively, go to **Settings > Permalinks** and click "Save Changes" to manually flush rewrite rules
+
+The plugin automatically flushes rewrite rules on activation to ensure profile URLs work properly.
+
 ## License
 
 GPL v2 or later
