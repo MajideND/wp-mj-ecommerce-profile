@@ -72,12 +72,15 @@ class WP_MJ_Ecommerce_Profile {
      */
     public function enqueue_admin_styles($hook) {
         if ('post.php' === $hook || 'post-new.php' === $hook) {
-            wp_enqueue_style(
-                'wp-mj-ecommerce-profile-admin',
-                plugins_url('assets/css/admin.css', __FILE__),
-                array(),
-                self::VERSION
-            );
+            $css_file = plugin_dir_path(__FILE__) . 'assets/css/admin.css';
+            if (file_exists($css_file)) {
+                wp_enqueue_style(
+                    'wp-mj-ecommerce-profile-admin',
+                    plugins_url('assets/css/admin.css', __FILE__),
+                    array(),
+                    self::VERSION
+                );
+            }
         }
     }
     
@@ -214,6 +217,9 @@ class WP_MJ_Ecommerce_Profile {
             return;
         }
         
+        // Add nonce field once for all meta boxes
+        add_action('edit_form_after_title', array($this, 'render_profile_nonce'));
+        
         // نویسنده (Writer) meta box
         add_meta_box(
             'mj_writer_metabox',
@@ -243,6 +249,15 @@ class WP_MJ_Ecommerce_Profile {
             'side',
             'default'
         );
+    }
+    
+    /**
+     * Render nonce field once for all profile meta boxes
+     */
+    public function render_profile_nonce() {
+        if (get_post_type() === 'product') {
+            wp_nonce_field('mj_profile_nonce_action', 'mj_profile_nonce');
+        }
     }
     
     /**
@@ -277,8 +292,6 @@ class WP_MJ_Ecommerce_Profile {
         
         $current_terms = wp_get_object_terms($post->ID, $taxonomy);
         $current_term_id = !empty($current_terms) && !is_wp_error($current_terms) ? $current_terms[0]->term_id : 0;
-        
-        wp_nonce_field('mj_profile_nonce_action', 'mj_profile_nonce');
         
         echo '<select name="' . esc_attr($taxonomy) . '" class="widefat">';
         echo '<option value="">' . __('انتخاب کنید', 'wp-mj-ecommerce-profile') . '</option>';
