@@ -99,6 +99,12 @@ class WP_MJ_Ecommerce_Profile {
         
         // Register Profile Type taxonomy
         $this->register_profile_type_taxonomy();
+        
+        // Check if we need to flush rewrite rules after activation
+        if (get_transient('wp_mj_ecommerce_profile_flush_rewrite_rules')) {
+            flush_rewrite_rules();
+            delete_transient('wp_mj_ecommerce_profile_flush_rewrite_rules');
+        }
     }
     
     /**
@@ -472,14 +478,12 @@ add_action('plugins_loaded', array('WP_MJ_Ecommerce_Profile', 'get_instance'));
 
 /**
  * Plugin activation hook
- * Flush rewrite rules to ensure profile URLs work properly
+ * Set a transient to flush rewrite rules on next init
  */
 function wp_mj_ecommerce_profile_activate() {
-    // Initialize the plugin instance to register post types and taxonomies
-    WP_MJ_Ecommerce_Profile::get_instance()->register_post_type_and_taxonomy();
-    
-    // Flush rewrite rules to make profile URLs work
-    flush_rewrite_rules();
+    // Set a transient to trigger rewrite flush on next init
+    // This ensures post types are registered before flushing
+    set_transient('wp_mj_ecommerce_profile_flush_rewrite_rules', 1, 60);
 }
 register_activation_hook(__FILE__, 'wp_mj_ecommerce_profile_activate');
 
