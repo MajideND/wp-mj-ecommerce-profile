@@ -1,0 +1,145 @@
+# Persian (Farsi) translation for WP MJ E-commerce Profile
+# Copyright (C) 2024 MajideND
+# This file is distributed under the same license as the WP MJ E-commerce Profile plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WP MJ E-commerce Profile 1.0.1\n"
+"Report-Msgid-Bugs-To: https://github.com/MajideND/wp-mj-ecommerce-profile\n"
+"POT-Creation-Date: 2024-12-26 17:30+0000\n"
+"PO-Revision-Date: 2024-12-26 17:30+0000\n"
+"Last-Translator: MajideND\n"
+"Language-Team: Persian\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Manual\n"
+
+#: wp-mj-ecommerce-profile.php:115
+msgctxt "post type general name"
+msgid "Profiles"
+msgstr "پروفایل‌ها"
+
+#: wp-mj-ecommerce-profile.php:116
+msgctxt "post type singular name"
+msgid "Profile"
+msgstr "پروفایل"
+
+#: wp-mj-ecommerce-profile.php:117
+msgctxt "admin menu"
+msgid "Profiles"
+msgstr "پروفایل‌ها"
+
+#: wp-mj-ecommerce-profile.php:118
+msgctxt "add new on admin bar"
+msgid "Profile"
+msgstr "پروفایل"
+
+#: wp-mj-ecommerce-profile.php:119
+msgctxt "profile"
+msgid "Add New"
+msgstr "افزودن جدید"
+
+#: wp-mj-ecommerce-profile.php:120
+msgid "Add New Profile"
+msgstr "افزودن پروفایل جدید"
+
+#: wp-mj-ecommerce-profile.php:121
+msgid "New Profile"
+msgstr "پروفایل جدید"
+
+#: wp-mj-ecommerce-profile.php:122
+msgid "Edit Profile"
+msgstr "ویرایش پروفایل"
+
+#: wp-mj-ecommerce-profile.php:123
+msgid "View Profile"
+msgstr "مشاهده پروفایل"
+
+#: wp-mj-ecommerce-profile.php:124
+msgid "All Profiles"
+msgstr "همه پروفایل‌ها"
+
+#: wp-mj-ecommerce-profile.php:125
+msgid "Search Profiles"
+msgstr "جستجوی پروفایل"
+
+#: wp-mj-ecommerce-profile.php:126
+msgid "Parent Profile:"
+msgstr "پروفایل والد:"
+
+#: wp-mj-ecommerce-profile.php:127
+msgid "No profiles found"
+msgstr "پروفایلی یافت نشد"
+
+#: wp-mj-ecommerce-profile.php:128
+msgid "No profiles found in trash"
+msgstr "پروفایلی در زباله‌دان یافت نشد"
+
+#: wp-mj-ecommerce-profile.php:156
+msgctxt "taxonomy general name"
+msgid "Profile Type"
+msgstr "نوع پروفایل"
+
+#: wp-mj-ecommerce-profile.php:157
+msgctxt "taxonomy singular name"
+msgid "Profile Type"
+msgstr "نوع پروفایل"
+
+#: wp-mj-ecommerce-profile.php:158
+msgid "Search Types"
+msgstr "جستجوی نوع"
+
+#: wp-mj-ecommerce-profile.php:159
+msgid "All Types"
+msgstr "همه انواع"
+
+#: wp-mj-ecommerce-profile.php:160
+msgid "Edit Type"
+msgstr "ویرایش نوع"
+
+#: wp-mj-ecommerce-profile.php:161
+msgid "Update Type"
+msgstr "به‌روزرسانی نوع"
+
+#: wp-mj-ecommerce-profile.php:162
+msgid "Add New Type"
+msgstr "افزودن نوع جدید"
+
+#: wp-mj-ecommerce-profile.php:163
+msgid "New Type Name"
+msgstr "نام نوع جدید"
+
+#: wp-mj-ecommerce-profile.php:190
+msgid "Writer"
+msgstr "نویسنده"
+
+#: wp-mj-ecommerce-profile.php:191
+msgid "Translator"
+msgstr "مترجم"
+
+#: wp-mj-ecommerce-profile.php:192
+msgid "Publisher"
+msgstr "انتشارات"
+
+#: wp-mj-ecommerce-profile.php:307
+msgid "Select One"
+msgstr "انتخاب کنید"
+
+#: wp-mj-ecommerce-profile.php:321
+msgid "What type is this profile?"
+msgstr "این پروفایل از چه نوعی است؟"
+
+#: wp-mj-ecommerce-profile.php:332
+msgid "Profile type not found"
+msgstr "نوع پروفایل یافت نشد"
+
+#: wp-mj-ecommerce-profile.php:416
+msgid "A profile type must be selected"
+msgstr "یک نوع پروفایل باید انتخاب شود"
+
+#: wp-mj-ecommerce-profile.php:416
+msgid "Error"
+msgstr "خطا"
+
