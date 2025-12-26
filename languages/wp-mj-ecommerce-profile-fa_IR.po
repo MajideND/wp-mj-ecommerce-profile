@@ -41,7 +41,7 @@ msgctxt "profile"
 msgid "Add New"
 msgstr "افزودن جدید"
 
-#: wp-mj-ecommerce-profile.php:120
+#: wp-mj-ecommerce-profile.php:120 wp-mj-ecommerce-profile.php:378
 msgid "Add New Profile"
 msgstr "افزودن پروفایل جدید"
 
@@ -77,7 +77,7 @@ msgstr "پروفایلی یافت نشد"
 msgid "No profiles found in trash"
 msgstr "پروفایلی در زباله‌دان یافت نشد"
 
-#: wp-mj-ecommerce-profile.php:156
+#: wp-mj-ecommerce-profile.php:156 wp-mj-ecommerce-profile.php:164 wp-mj-ecommerce-profile.php:254
 msgctxt "taxonomy general name"
 msgid "Profile Type"
 msgstr "نوع پروفایل"
@@ -111,19 +111,19 @@ msgstr "افزودن نوع جدید"
 msgid "New Type Name"
 msgstr "نام نوع جدید"
 
-#: wp-mj-ecommerce-profile.php:190
+#: wp-mj-ecommerce-profile.php:190 wp-mj-ecommerce-profile.php:220
 msgid "Writer"
 msgstr "نویسنده"
 
-#: wp-mj-ecommerce-profile.php:191
+#: wp-mj-ecommerce-profile.php:191 wp-mj-ecommerce-profile.php:230
 msgid "Translator"
 msgstr "مترجم"
 
-#: wp-mj-ecommerce-profile.php:192
+#: wp-mj-ecommerce-profile.php:192 wp-mj-ecommerce-profile.php:240
 msgid "Publisher"
 msgstr "انتشارات"
 
-#: wp-mj-ecommerce-profile.php:307
+#: wp-mj-ecommerce-profile.php:307 wp-mj-ecommerce-profile.php:358
 msgid "Select One"
 msgstr "انتخاب کنید"
 
@@ -135,11 +135,12 @@ msgstr "این پروفایل از چه نوعی است؟"
 msgid "Profile type not found"
 msgstr "نوع پروفایل یافت نشد"
 
-#: wp-mj-ecommerce-profile.php:416
+#: wp-mj-ecommerce-profile.php:416 wp-mj-ecommerce-profile.php:422
 msgid "A profile type must be selected"
 msgstr "یک نوع پروفایل باید انتخاب شود"
 
-#: wp-mj-ecommerce-profile.php:416
+#: wp-mj-ecommerce-profile.php:416 wp-mj-ecommerce-profile.php:422
 msgid "Error"
 msgstr "خطا"
+
 
