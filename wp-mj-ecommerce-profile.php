@@ -2,8 +2,8 @@
 /**
  * Plugin Name: WP MJ E-commerce Profile
  * Plugin URI: https://github.com/MajideND/wp-mj-ecommerce-profile
- * Description: Adds a custom Profile post type for WooCommerce products with types نویسنده (Writer), مترجم (Translator), and انتشارات (Publisher) with Farsi support
- * Version: 1.0.0
+ * Description: Adds a custom Profile post type for WooCommerce products with types Writer, Translator, and Publisher. Supports both English and Persian/Farsi languages.
+ * Version: 1.0.1
  * Author: MajideND
  * Author URI: https://github.com/MajideND
  * Text Domain: wp-mj-ecommerce-profile
@@ -27,7 +27,7 @@ class WP_MJ_Ecommerce_Profile {
     /**
      * Plugin version
      */
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
     
     /**
      * Instance of this class
@@ -99,6 +99,12 @@ class WP_MJ_Ecommerce_Profile {
         
         // Register Profile Type taxonomy
         $this->register_profile_type_taxonomy();
+        
+        // Check if we need to flush rewrite rules after activation
+        if (get_transient('wp_mj_ecommerce_profile_flush_rewrite_rules')) {
+            flush_rewrite_rules();
+            delete_transient('wp_mj_ecommerce_profile_flush_rewrite_rules');
+        }
     }
     
     /**
@@ -106,20 +112,20 @@ class WP_MJ_Ecommerce_Profile {
      */
     private function register_profile_post_type() {
         $labels = array(
-            'name'                  => _x('پروفایل‌ها', 'post type general name', 'wp-mj-ecommerce-profile'),
-            'singular_name'         => _x('پروفایل', 'post type singular name', 'wp-mj-ecommerce-profile'),
-            'menu_name'             => _x('پروفایل‌ها', 'admin menu', 'wp-mj-ecommerce-profile'),
-            'name_admin_bar'        => _x('پروفایل', 'add new on admin bar', 'wp-mj-ecommerce-profile'),
-            'add_new'               => _x('افزودن جدید', 'profile', 'wp-mj-ecommerce-profile'),
-            'add_new_item'          => __('افزودن پروفایل جدید', 'wp-mj-ecommerce-profile'),
-            'new_item'              => __('پروفایل جدید', 'wp-mj-ecommerce-profile'),
-            'edit_item'             => __('ویرایش پروفایل', 'wp-mj-ecommerce-profile'),
-            'view_item'             => __('مشاهده پروفایل', 'wp-mj-ecommerce-profile'),
-            'all_items'             => __('همه پروفایل‌ها', 'wp-mj-ecommerce-profile'),
-            'search_items'          => __('جستجوی پروفایل', 'wp-mj-ecommerce-profile'),
-            'parent_item_colon'     => __('پروفایل والد:', 'wp-mj-ecommerce-profile'),
-            'not_found'             => __('پروفایلی یافت نشد', 'wp-mj-ecommerce-profile'),
-            'not_found_in_trash'    => __('پروفایلی در زباله‌دان یافت نشد', 'wp-mj-ecommerce-profile'),
+            'name'                  => _x('Profiles', 'post type general name', 'wp-mj-ecommerce-profile'),
+            'singular_name'         => _x('Profile', 'post type singular name', 'wp-mj-ecommerce-profile'),
+            'menu_name'             => _x('Profiles', 'admin menu', 'wp-mj-ecommerce-profile'),
+            'name_admin_bar'        => _x('Profile', 'add new on admin bar', 'wp-mj-ecommerce-profile'),
+            'add_new'               => _x('Add New', 'profile', 'wp-mj-ecommerce-profile'),
+            'add_new_item'          => __('Add New Profile', 'wp-mj-ecommerce-profile'),
+            'new_item'              => __('New Profile', 'wp-mj-ecommerce-profile'),
+            'edit_item'             => __('Edit Profile', 'wp-mj-ecommerce-profile'),
+            'view_item'             => __('View Profile', 'wp-mj-ecommerce-profile'),
+            'all_items'             => __('All Profiles', 'wp-mj-ecommerce-profile'),
+            'search_items'          => __('Search Profiles', 'wp-mj-ecommerce-profile'),
+            'parent_item_colon'     => __('Parent Profile:', 'wp-mj-ecommerce-profile'),
+            'not_found'             => __('No profiles found', 'wp-mj-ecommerce-profile'),
+            'not_found_in_trash'    => __('No profiles found in trash', 'wp-mj-ecommerce-profile'),
         );
         
         $args = array(
@@ -147,15 +153,15 @@ class WP_MJ_Ecommerce_Profile {
      */
     private function register_profile_type_taxonomy() {
         $labels = array(
-            'name'              => _x('نوع پروفایل', 'taxonomy general name', 'wp-mj-ecommerce-profile'),
-            'singular_name'     => _x('نوع پروفایل', 'taxonomy singular name', 'wp-mj-ecommerce-profile'),
-            'search_items'      => __('جستجوی نوع', 'wp-mj-ecommerce-profile'),
-            'all_items'         => __('همه انواع', 'wp-mj-ecommerce-profile'),
-            'edit_item'         => __('ویرایش نوع', 'wp-mj-ecommerce-profile'),
-            'update_item'       => __('به‌روزرسانی نوع', 'wp-mj-ecommerce-profile'),
-            'add_new_item'      => __('افزودن نوع جدید', 'wp-mj-ecommerce-profile'),
-            'new_item_name'     => __('نام نوع جدید', 'wp-mj-ecommerce-profile'),
-            'menu_name'         => __('نوع پروفایل', 'wp-mj-ecommerce-profile'),
+            'name'              => _x('Profile Type', 'taxonomy general name', 'wp-mj-ecommerce-profile'),
+            'singular_name'     => _x('Profile Type', 'taxonomy singular name', 'wp-mj-ecommerce-profile'),
+            'search_items'      => __('Search Types', 'wp-mj-ecommerce-profile'),
+            'all_items'         => __('All Types', 'wp-mj-ecommerce-profile'),
+            'edit_item'         => __('Edit Type', 'wp-mj-ecommerce-profile'),
+            'update_item'       => __('Update Type', 'wp-mj-ecommerce-profile'),
+            'add_new_item'      => __('Add New Type', 'wp-mj-ecommerce-profile'),
+            'new_item_name'     => __('New Type Name', 'wp-mj-ecommerce-profile'),
+            'menu_name'         => __('Profile Type', 'wp-mj-ecommerce-profile'),
         );
         
         $args = array(
@@ -181,9 +187,9 @@ class WP_MJ_Ecommerce_Profile {
      */
     private function add_default_profile_types() {
         $default_types = array(
-            'writer'     => 'نویسنده',
-            'translator' => 'مترجم',
-            'publisher'  => 'انتشارات',
+            'writer'     => __('Writer', 'wp-mj-ecommerce-profile'),
+            'translator' => __('Translator', 'wp-mj-ecommerce-profile'),
+            'publisher'  => __('Publisher', 'wp-mj-ecommerce-profile'),
         );
         
         foreach ($default_types as $slug => $name) {
@@ -211,7 +217,7 @@ class WP_MJ_Ecommerce_Profile {
         // نویسنده (Writer) meta box
         add_meta_box(
             'mj_writer_metabox',
-            __('نویسنده', 'wp-mj-ecommerce-profile'),
+            __('Writer', 'wp-mj-ecommerce-profile'),
             array($this, 'render_writer_meta_box'),
             'product',
             'side',
@@ -221,7 +227,7 @@ class WP_MJ_Ecommerce_Profile {
         // مترجم (Translator) meta box
         add_meta_box(
             'mj_translator_metabox',
-            __('مترجم', 'wp-mj-ecommerce-profile'),
+            __('Translator', 'wp-mj-ecommerce-profile'),
             array($this, 'render_translator_meta_box'),
             'product',
             'side',
@@ -231,7 +237,7 @@ class WP_MJ_Ecommerce_Profile {
         // انتشارات (Publisher) meta box
         add_meta_box(
             'mj_publisher_metabox',
-            __('انتشارات', 'wp-mj-ecommerce-profile'),
+            __('Publisher', 'wp-mj-ecommerce-profile'),
             array($this, 'render_publisher_meta_box'),
             'product',
             'side',
@@ -245,7 +251,7 @@ class WP_MJ_Ecommerce_Profile {
     public function add_profile_type_meta_box() {
         add_meta_box(
             'mj_profile_type_metabox',
-            __('نوع پروفایل', 'wp-mj-ecommerce-profile'),
+            __('Profile Type', 'wp-mj-ecommerce-profile'),
             array($this, 'render_profile_type_meta_box'),
             'mj_profile',
             'side',
@@ -298,7 +304,7 @@ class WP_MJ_Ecommerce_Profile {
         $current_type_id = !empty($current_types) && !is_wp_error($current_types) ? $current_types[0]->term_id : 0;
         
         echo '<select name="mj_profile_type" class="widefat" required>';
-        echo '<option value="">' . __('انتخاب کنید', 'wp-mj-ecommerce-profile') . '</option>';
+        echo '<option value="">' . __('Select One', 'wp-mj-ecommerce-profile') . '</option>';
         
         if (!is_wp_error($profile_types) && !empty($profile_types)) {
             foreach ($profile_types as $type) {
@@ -312,7 +318,7 @@ class WP_MJ_Ecommerce_Profile {
         }
         
         echo '</select>';
-        echo '<p class="howto">' . __('این پروفایل از چه نوعی است؟', 'wp-mj-ecommerce-profile') . '</p>';
+        echo '<p class="howto">' . __('What type is this profile?', 'wp-mj-ecommerce-profile') . '</p>';
     }
     
     /**
@@ -323,7 +329,7 @@ class WP_MJ_Ecommerce_Profile {
         $type_term = get_term_by('slug', $profile_type, 'mj_profile_type');
         
         if (!$type_term || is_wp_error($type_term)) {
-            echo '<p>' . __('نوع پروفایل یافت نشد', 'wp-mj-ecommerce-profile') . '</p>';
+            echo '<p>' . __('Profile type not found', 'wp-mj-ecommerce-profile') . '</p>';
             if (is_wp_error($type_term)) {
                 error_log('WP MJ E-commerce Profile: Error getting term for ' . $profile_type . ': ' . $type_term->get_error_message());
             }
@@ -349,7 +355,7 @@ class WP_MJ_Ecommerce_Profile {
         $current_profile = get_post_meta($post->ID, '_mj_profile_' . $profile_type, true);
         
         echo '<select name="mj_profile_' . esc_attr($profile_type) . '" class="widefat">';
-        echo '<option value="">' . __('انتخاب کنید', 'wp-mj-ecommerce-profile') . '</option>';
+        echo '<option value="">' . __('Select One', 'wp-mj-ecommerce-profile') . '</option>';
         
         if (!empty($profiles)) {
             foreach ($profiles as $profile) {
@@ -369,7 +375,7 @@ class WP_MJ_Ecommerce_Profile {
         printf(
             '<a href="%s" target="_blank">%s</a>',
             admin_url('post-new.php?post_type=mj_profile'),
-            __('افزودن پروفایل جدید', 'wp-mj-ecommerce-profile')
+            __('Add New Profile', 'wp-mj-ecommerce-profile')
         );
         echo '</p>';
     }
@@ -407,13 +413,13 @@ function wp_mj_save_profile_type($post_id, $post) {
         } else {
             // If publishing without a type, show an error
             if ($post->post_status === 'publish') {
-                wp_die(__('یک نوع پروفایل باید انتخاب شود', 'wp-mj-ecommerce-profile'), __('خطا', 'wp-mj-ecommerce-profile'), array('back_link' => true));
+                wp_die(__('A profile type must be selected', 'wp-mj-ecommerce-profile'), __('Error', 'wp-mj-ecommerce-profile'), array('back_link' => true));
             }
             wp_delete_object_term_relationships($post_id, 'mj_profile_type');
         }
     } elseif ($post->post_status === 'publish') {
         // If publishing without selecting a type, prevent it
-        wp_die(__('یک نوع پروفایل باید انتخاب شود', 'wp-mj-ecommerce-profile'), __('خطا', 'wp-mj-ecommerce-profile'), array('back_link' => true));
+        wp_die(__('A profile type must be selected', 'wp-mj-ecommerce-profile'), __('Error', 'wp-mj-ecommerce-profile'), array('back_link' => true));
     }
 }
 
@@ -469,3 +475,25 @@ function wp_mj_save_product_profiles($post_id, $post) {
 
 // Initialize the plugin
 add_action('plugins_loaded', array('WP_MJ_Ecommerce_Profile', 'get_instance'));
+
+/**
+ * Plugin activation hook
+ * Set a transient to flush rewrite rules on next init
+ */
+function wp_mj_ecommerce_profile_activate() {
+    // Set a transient to trigger rewrite flush on next init
+    // This ensures post types are registered before flushing
+    // Using HOUR_IN_SECONDS to ensure it doesn't expire too quickly
+    set_transient('wp_mj_ecommerce_profile_flush_rewrite_rules', 1, HOUR_IN_SECONDS);
+}
+register_activation_hook(__FILE__, 'wp_mj_ecommerce_profile_activate');
+
+/**
+ * Plugin deactivation hook
+ * Flush rewrite rules to clean up
+ */
+function wp_mj_ecommerce_profile_deactivate() {
+    // Flush rewrite rules to clean up profile URLs
+    flush_rewrite_rules();
+}
+register_deactivation_hook(__FILE__, 'wp_mj_ecommerce_profile_deactivate');
